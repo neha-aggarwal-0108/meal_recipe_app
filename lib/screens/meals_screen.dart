@@ -19,10 +19,12 @@ class MealsScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: Text(
-            title,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 24, color: Colors.white),
+          title: Center(
+            child: Text(
+              title,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 24, color: Colors.white),
+            ),
           ),
         ),
         body: ListView.builder(
@@ -42,10 +44,13 @@ class MealsScreen extends StatelessWidget {
                     elevation: 2,
                     child: Stack(
                       children: [
-                        Image.network(
-                          filteredMeals[index].imageUrl,
-                          fit: BoxFit.cover,
-                          width: double.infinity,
+                        Hero(
+                          tag: filteredMeals[index].id,
+                          child: Image.network(
+                            filteredMeals[index].imageUrl,
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                          ),
                         ),
                         Positioned(
                           bottom: 0,

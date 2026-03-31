@@ -15,14 +15,28 @@ class RecipeScreen extends ConsumerWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: Text(
-            meal.title,
-            style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w700, fontSize: 24),
+          title: Center(
+            child: Text(
+              meal.title,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 24),
+            ),
           ),
           actions: [
             IconButton(
-              icon: Icon(isFav ? Icons.favorite : Icons.favorite_border),
+              icon: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                transitionBuilder: (child, animation) {
+                  return RotationTransition(
+                    turns: Tween(begin: 0.5, end: 1.0).animate(animation),
+                    child: child,
+                  );
+                },
+                key: ValueKey(isFav),
+                child: Icon(isFav ? Icons.favorite : Icons.favorite_border),
+              ),
               color: isFav ? Colors.red : Colors.white,
               onPressed: () {
                 ref.read(favMealProvider.notifier).toggleMealFavStatus(meal);
@@ -44,11 +58,14 @@ class RecipeScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.network(
-                  meal.imageUrl,
-                  width: double.infinity,
-                  height: 300,
-                  fit: BoxFit.cover,
+                Hero(
+                  tag: meal.id,
+                  child: Image.network(
+                    meal.imageUrl,
+                    width: double.infinity,
+                    height: 300,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 const SizedBox(
                   height: 14,
@@ -60,7 +77,7 @@ class RecipeScreen extends ConsumerWidget {
                 ...meal.ingredients.map((item) {
                   return Padding(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     child: Text(
                       item,
                       style: const TextStyle(color: Colors.white),
@@ -78,7 +95,7 @@ class RecipeScreen extends ConsumerWidget {
                 ...meal.steps.map((item) {
                   return Padding(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     child: Row(
                       children: [
                         const Icon(

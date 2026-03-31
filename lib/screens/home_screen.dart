@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meal_recipe_app/screens/category_screens.dart';
+// import 'package:meal_recipe_app/screens/category_screens.dart';
 import 'package:meal_recipe_app/screens/favourite_screens.dart';
 import 'package:meal_recipe_app/screens/home_page.dart';
 
@@ -11,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Widget> _screens = [HomePage(), FavouriteScreen()];
+  final List<Widget> _screens = [const HomePage(),const FavouriteScreen()];
   int _selectedIndex = 0;
 
   @override
@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white24,
         selectedFontSize: 16,
-        items: [
+        items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.category_rounded), label: 'Categories'),
           BottomNavigationBarItem(

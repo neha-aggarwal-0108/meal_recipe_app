@@ -16,10 +16,12 @@ class FavouriteScreen extends ConsumerWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: const Text(
-            'Favourite Meals',
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 24, color: Colors.white),
+          title: const Center(
+            child: Text(
+              'Favourite Meals',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 24, color: Colors.white),
+            ),
           ),
         ),
         body: favouriteMeals.isEmpty
